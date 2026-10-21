@@ -125,6 +125,23 @@
         <!-- Builtin injector for injecting google analytics code -->
         
 
+<script>
+  function fixRetinaCanvas() {
+    var canvas = document.getElementById("canvas");
+    if (canvas && window.devicePixelRatio > 1) {
+      var dpr = window.devicePixelRatio;
+      // Scale canvas internal resolution up for sharp text rendering
+      canvas.width = 1024 * dpr;
+      canvas.height = 512 * dpr;
+    }
+  }
+  window.addEventListener("load", fixRetinaCanvas);
+</script>
+
+
+
+
+
     </body>
 
     <!-- Custom PostBody code is injected here -->
