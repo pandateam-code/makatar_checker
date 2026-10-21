@@ -47,12 +47,14 @@
             }
 
             canvas {
-                width: 100vw !important;
-                height: 100vh !important;
-                object-fit: contain; /* Keeps aspect ratio intact */
-                image-rendering: optimizeSpeed;
-                -webkit-interpolation-mode: nearest-neighbor;
-                touch-action: none;
+	    width: 100vw !important;
+	    height: 100vh !important;
+	    object-fit: contain;
+
+    /* Crisp text rendering & anti-aliasing */
+    image-rendering: auto !important; /* Replaces nearest-neighbor scaling */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
             }
 
             :-webkit-full-screen #canvas {
