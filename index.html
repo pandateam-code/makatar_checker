@@ -22,23 +22,39 @@
 
         <!-- Set the background colour of the document -->
         <style>
-            body {
-                background: #0;
-                color: #cccccc;
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #000000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Container centering wrapper */
+            div.gm4html5_div_class {
+                width: 100%;
+                height: 100%;
                 margin: 0px;
                 padding: 0px;
                 border: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             canvas {
+                width: 100vw !important;
+                height: 100vh !important;
+                object-fit: contain; /* Keeps aspect ratio intact */
                 image-rendering: optimizeSpeed;
                 -webkit-interpolation-mode: nearest-neighbor;
-                -ms-touch-action: none;
                 touch-action: none;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
             }
+
             :-webkit-full-screen #canvas {
                 width: 100%;
                 height: 100%;
@@ -49,11 +65,6 @@
             }
             
             /* Custom Runner Styles */
-            div.gm4html5_div_class {
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-            }
             div.gm4html5_login {
                 padding: 20px;
                 position: absolute;
