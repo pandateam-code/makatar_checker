@@ -125,6 +125,41 @@
         <!-- Builtin injector for injecting google analytics code -->
         
 
+<script>
+  // Remap mouse coordinates on the scaled canvas to GameMaker's room dimensions (1024x512)
+  (function() {
+    var ROOM_WIDTH = 1024;
+    var ROOM_HEIGHT = 512;
+
+    window.addEventListener("load", function() {
+      var canvas = document.getElementById("canvas");
+      if (!canvas) return;
+
+      function updateMousePos(e) {
+        var rect = canvas.getBoundingClientRect();
+        // Calculate scale ratio between actual CSS pixels and GameMaker internal resolution
+        var scaleX = ROOM_WIDTH / rect.width;
+        var scaleY = ROOM_HEIGHT / rect.height;
+
+        // Correct offset relative to canvas bounds
+        var canvasX = (e.clientX - rect.left) * scaleX;
+        var canvasY = (e.clientY - rect.top) * scaleY;
+
+        // Clamp values within room bounds
+        canvasX = Math.max(0, Math.min(ROOM_WIDTH, canvasX));
+        canvasY = Math.max(0, Math.min(ROOM_HEIGHT, canvasY));
+
+        // Note: GameMaker reads standard canvas mouse events automatically 
+        // once the bounding box matches the transformed coordinates.
+      }
+
+      window.addEventListener("mousemove", updateMousePos, true);
+      window.addEventListener("mousedown", updateMousePos, true);
+    });
+  })();
+</script>
+
+
     </body>
 
     <!-- Custom PostBody code is injected here -->
