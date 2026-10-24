@@ -46,15 +46,16 @@
                 align-items: center;
             }
 
+            /* Dynamically sizes canvas while preserving exact 2:1 aspect ratio */
             canvas {
-	    width: 100vw !important;
-	    height: 100vh !important;
-	    object-fit: contain;
-
-    /* Crisp text rendering & anti-aliasing */
-    image-rendering: auto !important; /* Replaces nearest-neighbor scaling */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+                width: min(100vw, 200vh) !important;
+                height: min(100vh, 50vw) !important;
+                margin: auto;
+                display: block;
+                image-rendering: auto !important;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                touch-action: none;
             }
 
             :-webkit-full-screen #canvas {
@@ -124,41 +125,6 @@
 
         <!-- Builtin injector for injecting google analytics code -->
         
-
-<script>
-  // Remap mouse coordinates on the scaled canvas to GameMaker's room dimensions (1024x512)
-  (function() {
-    var ROOM_WIDTH = 1024;
-    var ROOM_HEIGHT = 512;
-
-    window.addEventListener("load", function() {
-      var canvas = document.getElementById("canvas");
-      if (!canvas) return;
-
-      function updateMousePos(e) {
-        var rect = canvas.getBoundingClientRect();
-        // Calculate scale ratio between actual CSS pixels and GameMaker internal resolution
-        var scaleX = ROOM_WIDTH / rect.width;
-        var scaleY = ROOM_HEIGHT / rect.height;
-
-        // Correct offset relative to canvas bounds
-        var canvasX = (e.clientX - rect.left) * scaleX;
-        var canvasY = (e.clientY - rect.top) * scaleY;
-
-        // Clamp values within room bounds
-        canvasX = Math.max(0, Math.min(ROOM_WIDTH, canvasX));
-        canvasY = Math.max(0, Math.min(ROOM_HEIGHT, canvasY));
-
-        // Note: GameMaker reads standard canvas mouse events automatically 
-        // once the bounding box matches the transformed coordinates.
-      }
-
-      window.addEventListener("mousemove", updateMousePos, true);
-      window.addEventListener("mousedown", updateMousePos, true);
-    });
-  })();
-</script>
-
 
     </body>
 
